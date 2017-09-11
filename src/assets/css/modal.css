@@ -1,0 +1,248 @@
+html {
+  moz-user-select: -moz-none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media only screen and (max-width: 360px) {
+  .textLeftImgCar {
+    padding-left: 5px;
+  }
+
+  .textRightImgCar {
+    padding-right: 5px;
+  }
+}
+
+input {
+  outline: none;
+}
+
+.keyboard {
+  position: fixed;
+  z-index: 333;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  display: block;
+}
+
+.keyboard .layer-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+
+.keyboard .keyboard-box {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 100%;
+  min-height: 150px;
+  background-color: #F6F6F6;
+  box-shadow: 0px 0px 6px #3f51b5;
+}
+
+.keyboard .keyboard-box .keyboard-header {
+  min-height: 35px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.keyboard-box a {
+  color: #333;
+  text-decoration: none;
+}
+
+.keyboard-header .car-num {
+  float: left;
+  height: 100%;
+  width: calc(100% - 100px - 10px);
+  margin-right: 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.keyboard-header .car-num a {
+  display: inline-block;
+  width: calc(100% / 7 - 2px);
+  height: 35px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 35px;
+  position: relative;
+  background-color: #FFF;
+  transition: all .25ms ease-out;
+}
+
+.keyboard-header .car-num a:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  border: 1px solid #CCC;
+  border-radius: 4px;
+}
+
+.keyboard-header .car-num .key-active {
+  color: #FF6666;
+}
+
+.keyboard-header .car-num .key-active:before {
+  border: 1px solid #FF6666;
+}
+
+.keyboard-header .btns-group {
+  float: left;
+  width: 100px;
+  height: 100%;
+  text-align: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.keyboard-header .btns-group a {
+  display: inline-block;
+  width: calc(100% / 2 - 2px);
+  height: 35px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 35px;
+  position: relative;
+  background-color: #FFF;
+  transition: all .25ms ease-out;
+}
+
+.keyboard-header .btns-group a:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  border: 1px solid #CCC;
+  border-radius: 4px;
+}
+
+.keyboard-header .btns-group .cancel {
+  background-color: #f1f1f1;
+}
+
+.keyboard-header .btns-group .cancel:hover {
+  background-color: #aeaeae;
+}
+
+.keyboard-header .btns-group .ok {
+  background-color: #03a9f4;
+  color: #e7e7e7;
+}
+
+.keyboard-header .btns-group .ok:hover {
+  background-color: #2196f3;
+  color: #FFF;
+}
+
+.keyboard .keyboard-box .keyboard-body {
+  min-height: 110px;
+  margin-top: 5px;
+  padding: 5px;
+  background-color: #BBB;
+}
+
+.keyboard-body .keyboard-content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.keyboard-body .keyboard-content a {
+  display: inline-block;
+  height: 35px;
+  font-size: 14px;
+  margin: 2px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 35px;
+  position: relative;
+  background-color: #FFF;
+  transition: all .25ms ease-out;
+}
+
+.keyboard-body .keyboard-content a:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  border: 1px solid #CCC;
+  border-radius: 4px;
+}
+
+.keyboard-body .keyboard-content.province a {
+  width: calc(100% / 9 - 4px);
+}
+
+.keyboard-body .keyboard-content.province a:nth-last-child(1),
+.keyboard-body .keyboard-content.province a:nth-last-child(2),
+.keyboard-body .keyboard-content.province a:nth-last-child(3),
+.keyboard-body .keyboard-content.province a:nth-last-child(4),
+.keyboard-body .keyboard-content.province a:nth-last-child(5),
+.keyboard-body .keyboard-content.province a:nth-last-child(6) {
+  width: calc(100% / 6 - 4px);
+}
+
+.keyboard-body .keyboard-content.letter a {
+  width: calc(100% / 10 - 4px);
+}
+
+.keyboard-body .keyboard-content.letter a:nth-last-child(1),
+.keyboard-body .keyboard-content.letter a:nth-last-child(2),
+.keyboard-body .keyboard-content.letter a:nth-last-child(3),
+.keyboard-body .keyboard-content.letter a:nth-last-child(4),
+.keyboard-body .keyboard-content.letter a:nth-last-child(5),
+.keyboard-body .keyboard-content.letter a:nth-last-child(6),
+.keyboard-body .keyboard-content.letter a:nth-last-child(7) {
+  width: calc(100% / 7 - 4px);
+}
+
+.mask {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  _position: absolute;
+  top: 0;
+  z-index: 20;
+}
+
+.opacity {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  background-color: #000;
+}
