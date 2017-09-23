@@ -5,44 +5,24 @@
 </style>
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <button class="btn btn-info btn-lg btn-block" @click="myCar">我的车辆</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <button class="btn btn-info btn-lg btn-block" @click="rePaying">缴费</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <button class="btn btn-info btn-lg btn-block" @click="lock">锁车</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <button class="btn btn-info btn-lg btn-block" @click="countCheck">账单查询</button>
-      </div>
-    </div>
-
+   
+		<i-switch class="switch-on" @on-change="lockCar" v-model="st"   size="large">
+							  	    <span slot="open" style="font-weight:bold" >已锁</span>
+							        <span slot="close"  style="font-weight:bold">未锁</span>
+		 </i-switch>
   </div>
 </template>
 <script>
   export default {
+  	data(){
+  		return{
+  			st:false
+  		}
+  	},
     methods:{
-      lock () {
-       this.$router.push('/lock')
-      },
-      myCar(){
-        this.$router.push('/addCar')
-      },
-      rePaying(){
-        this.$router.push('/chooseCar')
-      },
-      countCheck(){
-        this.$router.push('/countDetail')
-      }
+   		lockCar(){
+   			
+   		}
     }
   }
 

@@ -1,12 +1,11 @@
 .ivu-select{display: block;margin: 0 auto}
 .ivu-modal-header,.ivu-modal-footer{border: none}
-.car{padding: 15px 0;background: #fff;}
-.car h3{font-weight: normal;font-size: 16px}
-.car_d{width: 80%;height: 40px;line-height: 40px;color:#5bc0de;outline: medium;margin-right: 80px;
+
+.ddHead .car h3{font-weight: normal;font-size: 16px}
+.ddHead .car_d{height: 40px;line-height: 40px;color:#090909;outline: medium;margin-right: 80px;
  border-radius: 25px;font-size: 16px}
-.svgsd{position: relative;}
-.svgsd img{width: 31px;}
-/*.svg img{position: absolute;width: 25px;right: 45px;top:17%};*/
+.ddHead .svgsd{position: relative;padding: 5px 0;background: #fff;border: 1px solid #eee;}
+.ddHead .svgsd img{width: 31px;margin-right: 15px;}
 
 .keyboard {
   position: fixed;
@@ -48,7 +47,7 @@
 .keyboard-header .car-num {
   display: flex;
   height: 100%;
-  width: calc(100% - 30px);
+  width: 260px;
   margin-right: 10px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -59,8 +58,11 @@
   justify-content: space-between;
 }
 .keyboard-header .car-num a {
+	margin-right: 5px;
+	
   display: inline-block;
   width: calc(100% / 7 - 4px);
+ /*width:60px;*/
   height: 40px;
   font-size: 18px;
   border-radius: 4px;
@@ -70,6 +72,9 @@
   background-color: #e4e4e4;
   transition: all .25ms ease-out;
   /*border: 1px solid #CCC;*/
+}
+.keyboard-header .car-num a:first-child{
+	margin-left: 6px;
 }
 .keyboard-header .car-num a:before {
   content: '';
@@ -94,6 +99,7 @@
   float: left;
   width: 100px;
   height: 100%;
+  margin: 0 10px;
   text-align: center;
   display: -webkit-box;
   display: -webkit-flex;
@@ -166,7 +172,7 @@
   display: inline-block;
   height: 35px;
   font-size: 18px;
-  margin: 2px;
+  /*margin: 2px;*/
   border-radius: 4px;
   text-align: center;
   line-height: 35px;

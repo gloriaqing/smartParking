@@ -34,7 +34,7 @@
 //    	this.$emit('carName',data.plate_number,data.size_type);
       	localStorage.setItem('car_number',data.plate_number);
       	localStorage.setItem('carType',data.size_type)
-        this.$router.push('/addRent')
+        this.$router.push('/rentDetail')
       }
     },
     created() {

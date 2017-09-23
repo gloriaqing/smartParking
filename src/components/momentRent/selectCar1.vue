@@ -12,9 +12,9 @@
 <template>
   <div class="car">
     <h3>请选择车牌</h3>
-    <div class="svgsd"  v-for="item in carList" @click="chooseCar(item)">
+    <div class="svgsd"  v-for="(item,index) in carList">
     	<img src="../../assets/img/icon/车辆.png" />
-    	<span class="car_d" style="text-align: center" >{{item.plate_number}}</span>
+    	<span class="car_d" style="text-align: center" @click="chooseCar()">{{item.plate_number}}</span>
   	</div> 	
   </div> 
 </template>
@@ -32,10 +32,9 @@
 //			addCarMoment(){
 //				this.$router.push('/addCarMoment')
 //			},
-			chooseCar:function(item){
-               
-        localStorage.setItem("car_number",item.plate_number);
-        this.$router.push('/ddss'),
+			chooseCar:function($event){
+        this.$router.push('/ponList'),
+        localStorage.setItem("car_number",event.currentTarget.innerText);
         console.log(localStorage.getItem("car_number"));
         console.log(obj);
      },

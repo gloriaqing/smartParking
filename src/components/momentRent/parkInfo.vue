@@ -79,7 +79,7 @@
 						"search_text": this.parktext,
 						city: ''
 					}).then(res => {
-						this.sd=true;
+						this.sd=true;  
 						console.log(res);
 						this.parkList = res.data.data;
 

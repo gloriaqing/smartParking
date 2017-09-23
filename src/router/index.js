@@ -21,17 +21,14 @@ import selectCar from '@/components/momentRent/selectCar'
 import ponList from '@/components/momentRent/ponList'
 import accInfo from '@/components/momentRent/accInfo'
 import addCarMoment from '@/components/momentRent/addCarMoment'
-
-//优惠卷开始
-//import sendCpo from '@/components/momentRent/sendCpo'
-//import makeCpo from '@/components/momentRent/makeCpo'
-//import addShop from '@/components/momentRent/addShop'
-//import addMarket from '@/components/momentRent/addMarket'
-//优惠卷结束
 import bindPhone from '@/components/monthRent/bindPhone'
 import rentDetail from '@/components/monthRent/rentDetail'
 import NotFoundComponent from '@/components/monthRent/NotFoundComponent'
 import firstPage from '@/components/monthRent/firstPage'
+import repay from '@/components/monthRent/repay'
+import selectCar1 from '@/components/momentRent/selectCar1'
+
+import addRent from '@/components/monthRent/addRent'
 Vue.use(Router)
 
 export default new Router({
@@ -52,6 +49,16 @@ export default new Router({
       component: chooseType
     },
     {
+      path: '/selectCar1',
+      name: 'selectCar1',
+      component: selectCar1
+    },
+    {
+      path: '/addRent',
+      name: 'addRent',
+      component: addRent
+    },
+    {
       path:'/monthRent',
       name:'monthRent',
       component:monthRent
@@ -59,6 +66,11 @@ export default new Router({
       path:'/firstPage',
       name:'firstPage',
       component:firstPage
+    },
+    {
+      path:'/repay',
+      name:'repay',
+      component:repay
     },
     {
       path:'/lock',
@@ -140,26 +152,6 @@ export default new Router({
       name:'addCarMoment',
       component:addCarMoment
     },
-//  {
-//    path:'/addMarket',
-//    name:'addMarket',
-//    component:addMarket
-//  },
-//  {
-//    path:'/makeCpo',
-//    name:'makeCpo',
-//    component:makeCpo
-//  },
-//  {
-//    path:'/addShop',
-//    name:'addShop',
-//    component:addShop
-//  },
-//  {
-//    path:'/sendCpo',
-//    name:'sendCpo',
-//    component:sendCpo
-//  },
     {
       path:'/parkInfo',
       name:'parkInfo',

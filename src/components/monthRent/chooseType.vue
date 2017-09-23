@@ -19,7 +19,10 @@
       		<img style="width: 40px;margin-top: 30px" src="../../assets/img/icon/月租卡.png"  />
       		<button class="btn" id="rentMonth" @click="rentMonth">续费</button>
       	</div>
-        
+        <div>
+      		<img style="width: 40px;margin-top: 30px" src="../../assets/img/icon/月租卡.png"  />
+      		<button class="btn" id="rentMonth" @click="addRent">添加月租入口</button>
+      	</div>
       </div>
     </div>
   </div>
@@ -28,51 +31,20 @@
 	var ds;
 	var type;
   export default {
+  	data(){
+  		return{  			
+  		} 		
+  	},
     methods:{
       rentMoment(){
-        this.$router.push('/carInfo')
+        this.$router.push('/selectCar')
       },
       rentMonth(){
-        this.$router.push('/monthRent')
+        this.$router.push('/rePay')
       },
-      getQueryString(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-            var r = window.location.search.substr(1).match(reg);
-            if(r != null) {
-              return unescape(r[2]);
-            }
-            return null;
-       }
-    },
-    created(){
-
-    	// 获取url参数中的openid获取type
-
-    	// 根据openid判断是否已经绑定手机
-
-    	//   已绑定：
-    	//         留在当前页面
-    	//   未绑定：
-    	// 				 跳转到绑定页面，并把openid何type在url中拼接
-
-  		ds=this.getQueryString('openid')
-  		console.log(ds)
-    	localStorage.setItem('openid',ds)
-
-//  	var getOp= localStorage.getItem('openid')  // 获取绑定此页面的openid
-//    var oi=localStorage.getItem('openId')    //  获取绑定手机页面的openid*/
-//    console.log(ds)
-      type = this.getQueryString('type')
-      this.$http.get("http://api.basecn.cn/cloud/api/bind/findUserId?openId=" + ds
-      ).then(res=> {
-      	console.log(res)
-      	if(res.data.data==null){
-      		window.location.href="http://yc2.basecn.cn?openid="+ds+"&type="+type;
-      	}else{
-      		localStorage.setItem('userid',res.data.data.userId)
-      	}
-      })
-
+      addRent(){
+      	this.$router.push('/chooseCar')
+      }
     }
   }
 

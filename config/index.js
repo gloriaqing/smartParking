@@ -23,18 +23,18 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 80,
+    port: 8080,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-//    '/api': {
-//      target: 'http://prod20.yc-yunpass.com:8080',
-//      changeOrigin: true,
-//      pathRewrite: {
-//        '^/api': ''
-//      }
-//    }
+      '/api': {
+        target: 'http://prod20.yc-yunpass.com:8080',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
