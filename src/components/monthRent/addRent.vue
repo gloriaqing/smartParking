@@ -3,27 +3,31 @@
 </style>
 <template>
 	<div class="form-horizontal contract">
-		<p style="width: 100%;height: 45px;background: #1095D9;font-size: 16px;color: #fff;line-height: 45px;">缴费信息</p>
+		<p style="width: 100%;height: 45px;background: #1095D9;font-size: 16px;color: #fff;line-height: 45px;">添加租约信息</p>
 		<div style="padding: 30px;">
 			<div class="form-group">
 				<label class="parkText">租约开始时间</label>
 				<div class="col-sm-10 deHeight">
-					<Date-picker type="date"  @on-change="getInVa" v-model="firstValue" style="width:100%;display: block;font-size: 15px" placeholder="选择日期"></Date-picker>
-				  <span v-show='show1' style="color:red;display:block;margin-top:10px">请选择日期</span>
+					<!--<DatePicker type="date"  @on-change="getInVa" v-model="firstValue" style="width:100%;display: block;font-size: 15px" placeholder="选择日期"></DatePicker>-->
+        			<DatePicker type="date" confirm placeholder="选择日期" @on-change="getInVa" v-model="firstValue" style="width:100%;display: block;font-size: 15px"></DatePicker>
+       
+
+				  <span v-show='show1' style="color:red;display:block;margin-top:4px">请选择日期</span>
 				</div>
 	
 			</div>
 			<div class="form-group">
 				<label class="parkText">租约时间 (月份)</label>
 				<div class="col-sm-10 monthDate deHeight">
-					<input type="text" class="form-control chooseDate" @blur="isibles" v-model="getNum" @click="pickMonth" placeholder="请选择租期时间" />
-			    <span v-show='show2' style="color:red;display:block;margin-top:10px">请选择租期</span>
-					</div>
-	
+					<img src="../../assets/img/images/plus (1).svg" class="addImg" @click='add' />
+					<input type="text" style="background: #fff;padding: 6 27px;" class="form-control chooseDate" @blur="isibles" v-model="getNum" @click="pickMonth" placeholder="请选择租期时间" />
+			   		<img src="../../assets/img/images/minus (2).svg" class="delImg" @click='decrese' />
+			   		<span v-show='show2' class="notice">请选择租期</span>
+				</div>
 			</div>
-			<div class="pickMonthNum" v-show="show">
+			<!--<div class="pickMonthNum" v-show="show">
 				<div v-for="list in lists" @click="showNumber(list)">{{list.name}}</div>
-			</div>
+			</div>-->
 			<div class="form-group">
 				<label class="parkText">选择停车场</label>
 				<div class="col-sm-10 deHeight">
@@ -38,17 +42,17 @@
 									</ul>
 								</div>
 						</div>
-					<span v-show='show3' style="color:red;display:block;margin-top:10px">请选择停车场</span>
+					<span v-show='show3' style="color:red;display:block;margin-top:4px">请选择停车场</span>
 				</div>
 	
 			</div>
-			<div class="form-group">
+			<!--<div class="form-group">
 				<label class="parkText">选择车位</label>
 				<div class="col-sm-10 deHeight">
-					<input type="text" v-model="carPlace" @blur="isiblesPark" class="form-control" placeholder="请选择停车场" />
+					<input type="text" v-model="carPlace" @blur="isiblesPark" class="form-control" placeholder="请选择车位" />
 					<span v-show='show4' style="color:red;display:block">请选择车位</span>
 				</div>
-			</div>
+			</div>-->
 			<button type="button" @click="goPay" style="width: 100%;height: 45px;margin-top: 20px;" class="btn btn-primary btnSure" data-toggle="button"> 确认</button>
 		</div>
 	</div>
@@ -135,7 +139,8 @@
 	}
 	var da= localStorage.getItem('durationDate')
 	var sd=localStorage.getItem('today')
-	var cardNumber
+	var cardNumber;
+	var getMonth=0;
 	export default {
 		data() {
 			return {
@@ -189,17 +194,35 @@
 		props: ['carN', 'car_size', 'getPhone'],
 		created() {
 //			console.log(this.carN)
-      cardNumber=localStorage.getItem('car_number')
-      console.log(localStorage.getItem('parkid'))
-      this.parktext=localStorage.getItem('parklot_name')
-      this.carPlace=localStorage.getItem('parkport_number')
-      //获取最后一天并加一天
-      var rightTime= localStorage.getItem('endTime')
-      var rightDate = new Date(rightTime);//获取当前时间
-      rightDate.setDate(rightDate.getDate()+1);//设置天数 -1 天
-      this.firstValue = rightDate.format("yyyy-MM-dd");
+	      cardNumber=localStorage.getItem('car_number')
+	      console.log(localStorage.getItem('parkid'))
+//	      this.parktext=localStorage.getItem('parklot_name')
+	      this.carPlace=localStorage.getItem('parkport_number')
+	      //获取最后一天并加一天
+//	      var rightTime= localStorage.getItem('endTime')
+//	      var rightDate = new Date(rightTime);//获取当前时间
+//	      rightDate.setDate(rightDate.getDate()+1);//设置天数 -1 天
+//	      this.firstValue = rightDate.format("yyyy-MM-dd");
 		},
 		methods: {
+			add(){
+				console.log(typeof this.getNum)
+//				this.getNum.toString('')	
+				this.getNum=getMonth;	
+				 this.getNum = parseInt(this.getNum) + 1;					
+				 getMonth=this.getNum					
+				this.getNum= this.getNum+'个月'
+			},
+
+			decrese(){								
+				if(getMonth > 0){
+					getMonth=parseInt(getMonth) - 1
+					if(getMonth!=0){
+						this.getNum = getMonth+'个月';	
+					}	                
+	            }
+				console.log(typeof getMonth)
+			},
 			getInVa(data) {//获取日期
 				console.log(data)
 				this.firstValue = data;
@@ -241,7 +264,8 @@
 			},
 			goPay() {
 				var now = new Date(this.firstValue);
-				var newDate = DateAdd("m ", this.getNumMonth, now);
+				
+				var newDate = DateAdd("m ", getMonth, now);
 				console.log(newDate)
 				var time = newDate.format("yyyy-MM-dd")
 				console.log(time)
@@ -256,27 +280,21 @@
 		          this.show2=true
 		        }if(this.parktext==""){
 		          this.show3=true
-		        }if(this.carPlace==""){
-		          this.show4=true
 		        }
-		//		if(this.firstValue!=''&&this.getNumMonth!=''&&this.parktext!=''&&this.carPlace!=''){
+//				if(this.carPlace==""){
+//		          this.show4=true
+//		        }
+				
 		         var carT=localStorage.getItem('carType')
 		         console.log(carT)
 		         if(carT==0){
 		            carT='SMALL'
-		         }else if(carT==1){
+		         }else if(carT>0&&carT<5){
 		            carT='MIDDLE'
 		         }else if(carT==5){
 		            carT='BIG'
-		          }
-//		      localStorage.setItem('startTime',this.firstValue)
-//					localStorage.setItem('endTime',time)
-//					localStorage.setItem('park_id',this.parkId)
-//					localStorage.setItem('parkport_id',this.parkportid)
-//					
-////					localStorage.setItem('billingfee',res.data.data.billinginifee)
-//					localStorage.setItem('rentTime',this.getNum)
-						
+		        }
+				if(this.firstValue!=''&&this.getNum!=''&&this.parktext!=''){		
 					this.$http({
 					url: 'http://prod20.yc-yunpass.com:8080/park_admin/addOwnerLongLease',
 					method: 'POST',
@@ -289,21 +307,28 @@
 						"long_lease_type": "MONTHLY",
 						"lease_start_date": this.firstValue,
 						"lease_end_date": time,
-						"park_port_number": this.carSeat
+						"park_port_number": ''
 					}}).then(res=>{
 						console.log(res)
-						this.$router.push({
-							name: 'rePay'
-//							params: {
-//								deviceId: this.firstValue,
-//								getRange: this.getNum,
-//								park_id: this.parkId,
-//								parkport_id: this.parkportid,
-//								endDate: time
-//							}
-						})
+						if(res.data.code==1){
+							alert('车辆添加租约成功')
+							this.$router.push({
+								path: '/rePay'
+	//							params: {
+	//								deviceId: this.firstValue,
+	//								getRange: this.getNum,
+	//								park_id: this.parkId,
+	//								parkport_id: this.parkportid,
+	//								endDate: time
+	//							}
+							})
+						}else if(res.data.code==2010){
+							alert('创建失败,该车辆已在该停车场建立了租约')
+						}else{
+							alert('创建失败')
+						}
 					})
-		//		}
+				}
 			},
 			isibles() {
 				var _this = this

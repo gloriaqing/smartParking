@@ -291,11 +291,13 @@
           		"Authorization":"WEIXINSERVER:{}" ,"Content-Type":"application/json"}
           	}).then(res=>{
           		console.log(res)
-          		
-          		var allWords = {plate_number:this.province+this.letter+'.'+this.mixy+this.mixe+this.mixs+this.mixf+this.mixw ,state:2}
-            	this.listsPp.splice(index,1)
-            	alert('删除车辆成功')
-//          	this.$router.push({path:'/firstPage'}) // 跳转失败，下个星期二修改完成
+          		if(res.data.code=1){
+	          		var allWords = {plate_number:this.province+this.letter+'.'+this.mixy+this.mixe+this.mixs+this.mixf+this.mixw ,state:2}
+	            	this.listsPp.splice(index,1)
+	            	alert('删除车辆成功')
+	            }else{
+	            	alert('车辆删除失败')
+	            }
           	})
           	}
           }
@@ -345,8 +347,8 @@
         
       },
       cancelKeyboard () {
-      	this.addC=true;
-      	this.total=false;
+//    	this.addC=true;
+      	this.total=true;
         this.province='';this.letter='';this.mixy='';this.mixe='';this.mixs='';this.mixf='';this.mixw='';
         this.isActivee=false;this.isActivef=false;this.isActiveg=false;this.isActivea=false;this.isActiveb=false;
         this.isActived=false;this.isActivec=false;
@@ -354,7 +356,7 @@
       },
       first(){
       	console.log(typeof this.model13) //string
-      	if(this.model13!=''){ //假如选择车位大小，车牌号第一位出来
+//    	if(this.model13!=''){ //假如选择车位大小，车牌号第一位出来
       		this.total=true;this.pro=true;this.lett=false;this.addC=false;//我的车辆样式消失
 	        this.lettnuma=false  //字母混合键盘
 	        this.lettnumb=false  //字母混合键盘
@@ -363,7 +365,7 @@
 	        this.lettnume=false  //字母混合键盘
 	        this.isActivee=false;this.isActivef=false;this.isActiveg=false;this.isActivea=true;this.isActiveb=false;
 	        this.isActived=false;this.isActivec=false;	
-      	}               
+//    	}               
       },
       second(){ //第二位车牌号
       	

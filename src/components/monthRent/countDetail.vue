@@ -36,9 +36,9 @@
 					<p>
 						<span style="display: inline-block;width:100px">
 						{{orders.parkLease.leaseType}}：</span>
-						<span  v-if="orders.parkOrder"  style="width:200px;text-align: left;">
+						<span  style="width:200px;text-align: left;">
 							{{orders.parkOrder.orderCreateTime}}</span>
-							<span v-else style="display: none;"></span>
+							<!--<span v-else style="display: none;"></span>-->
 					</p>
 					
 				</div>
@@ -75,7 +75,7 @@
 			</div>
 		</div>
 			
-    	<h3 v-show='hide'>暂无账单</h3>
+    	<h3 v-show='hideBil' style="line-height: 44px;background: #f0f0f0;margin-top: 6px;">暂无账单</h3>
   </div>
 </template>  
 <script>
@@ -99,13 +99,13 @@
 		}
 		return fmt;
 	} 
-	var op;
+	var openid;
   	var type,phone;				
 	export default {
 			data() {
 				return {
-					orderList: [],resTime:'',resf:'',leaseType:'',showPay:false,hide:false,
-					items:[],hide:true,show:true,payTrue:'' //存储请求返回的数据
+					orderList: [],resTime:'',resf:'',leaseType:'',showPay:false,hideBil:true,hide:true,
+					items:[],show:true,payTrue:'' //存储请求返回的数据
 				}
 			},
 			beforeCreate() {	
@@ -114,6 +114,7 @@
 						url: 'http://api.basecn.cn/cloud/api/park/queryBillings?userId='+localStorage.getItem("userid")						
 					}).then(res=> {
 //						console.log(res.data.data);
+						this.hideBil=false
 						this.orderList = res.data.data;
 						for(var i =0;i<this.orderList.length;i++){	
 							if(this.orderList[i].parkLease.leaseType==1){ //判断租约类型
@@ -143,43 +144,21 @@
 							this.orderList[i].parkLease.regEndTime=s2											
 						}
 						if(this.orderList.length==0){
-//							alert('暂无账单')
-//							this.$Message.info({
-//					                content: '暂无账单',
-//					                duration: 10
-//					            });
-//							this.hide=true
-							op=localStorage.getItem('openid');
+							this.hideBil=true
+							alert('暂无账单')
+						
+							openid=localStorage.getItem('openid');
 							type=localStorage.getItem('type');
-							phone=localStorage.getItem('phone');							
-							window.location.href="/firstPage?openid=" + op + "&type="+type+"&phone="+phone						
+							phone=localStorage.getItem('phone');	
+							window.location.href="/firstPage?openid=" + openid + "&type="+type+"&phone="+phone
+							
+	
 						}
 					});
 				
 			},
 			methods: {	
-				update () {
-	                if(this.timer <= 0) 
-	                {
-	                    this.timer = 30;
-	                }
-	                else{
-	                    this.timer--;
-	                }
-	            },
-	             startTimer () {
-                //如果是false就开始倒计时，如果是true就停止倒计时
-	                if(this.stop == false) 
-	                {
-	                    this.Interval = setInterval(this.update,1000);    
-	                }
-	                else
-	                {
-	                    clearInterval(this.Interval);
-	                }
-	
-	                this.stop = !this.stop;
-	            },
+				
 				test(a){
 					return a != 'NaN-aN-aN';
 				},

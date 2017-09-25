@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import chooseType from '@/components/monthRent/chooseType'
 import monthRent from '@/components/monthRent/monthRent'
-import lock from '@/components/monthRent/lock'
 import addCar from '@/components/monthRent/addCar'
 import chooseCar from '@/components/monthRent/chooseCar'
 
@@ -71,12 +70,7 @@ export default new Router({
       path:'/repay',
       name:'repay',
       component:repay
-    },
-    {
-      path:'/lock',
-      name:'lock',
-      component:lock
-    },
+    },   
     {
       path:'/addCar',
       name:'addCar',

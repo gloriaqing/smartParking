@@ -48,11 +48,12 @@
 </template>
 <script>
 	var carNum,parklot_id,lock_status;
+	var openid,phone,type;
   export default {
 
     data(){
         return {
-          carList:[],car_number:'',carNd:'',parkName:'',parklot_id:'',parkUser:false
+          carList:[],car_number:'',carNd:'',parkName:'',parklot_id:'',parkUser:true
         }
       },
     created(){
@@ -65,7 +66,8 @@
           async: false,
           url:'http://prod20.yc-yunpass.com/yunpasswx/api/cars/getPresentCars'
         }).then(res=>{
-        	this.carList=res.data.data;        	
+        	this.carList=res.data.data; 
+        	this.parkUser=false;
         	if(this.carList.length!=0){
 		          console.log( this.carList)                 
 		         for(var i=0;i<this.carList.length;i++){	
@@ -78,6 +80,11 @@
 	         	}
         	}else{
         		this.parkUser=true
+        		alert('无在场车辆')
+        		openid=localStorage.getItem('openid');
+				type=localStorage.getItem('type');
+				phone=localStorage.getItem('phone');	
+				window.location.href="/firstPage?openid=" + openid + "&type="+type+"&phone="+phone;							        		       		
         	}
         	
         

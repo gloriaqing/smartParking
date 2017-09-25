@@ -62,7 +62,7 @@
 <script>
 	var billing_id;
 	var a;
-
+	var openid,phone,type;
 	export default {
 		data() {
 			return {
@@ -151,7 +151,12 @@
 					if(obj.data.status) {
 						if(obj.data.data.type == 'nopay'){
 							alert("支付成功，谢谢使用，请在15分钟内出场");						
-							window.location.href = '/firstPage';
+//							window.location.href = '/firstPage';
+							openid=localStorage.getItem('openid');
+							type=localStorage.getItem('type');
+							phone=localStorage.getItem('phone');	
+							window.location.href="/firstPage?openid=" + openid + "&type="+type+"&phone="+phone
+							
 						};
 						console.log(obj.data.appId);
 //						alert("预付款订单生成成功");
@@ -167,7 +172,7 @@
 						}, function(res) {
 							if(res.err_msg == "get_brand_wcpay_request:ok") {
 								alert("支付成功，谢谢使用，请在15分钟内出场");
-								this.$router.push('/firstPage');
+								window.location.href="/firstPage?openid=" + openid + "&type="+type+"&phone="+phone
 							} else if(res.err_msg == "get_brand_wcpay_request:cancel") {
 								alert('你已取消支付');
 							} else if(res.err_msg == "get_brand_wcpay_request:fail") {

@@ -62,6 +62,7 @@
 
 </template>
 <script>
+	var type,openid,phone;
 	export default {
 		data() {
 			return {
@@ -71,7 +72,7 @@
 				formatD: '',
 				total: '',
 				end: '',
-				range: '',
+				rentTime: '',
 				parkList: [],
 				parktext: '',
 				carPlaces: [],
@@ -92,7 +93,7 @@
 		
 			this.carNumber = localStorage.getItem('car_number'),
 			this.formatD = localStorage.getItem('startTime'),
-			this.range = localStorage.getItem('rentTime'),			
+			this.rentTime = localStorage.getItem('rentTime'),			
 			this.endDate = localStorage.getItem('endTime'),
 			this.userid=localStorage.getItem('userid'),
 			this.openid=localStorage.getItem('openid'),
@@ -117,7 +118,7 @@
 					data: { //还有两个参数，后台说可以不要
 						"openId": this.openid,
 						"totalFee": this.fee*100,												
-						"billingId":localStorage.getItem('bli'),
+						"billingId":localStorage.getItem('billing_id'),
 						"type":"pay"
 					},
 					url: 'http://api.basecn.cn/cloud/api/wechat/pay/unifiedorder',
@@ -127,6 +128,14 @@
 					}
 					}).then(function(obj) {
 						if(obj.data.status) {
+							if(obj.data.data.type == 'nopay'){
+//								alert("支付成功，谢谢使用，请在15分钟内出场");						
+	//							window.location.href = '/firstPage';
+								openid=localStorage.getItem('openid');
+								type=localStorage.getItem('type');
+								phone=localStorage.getItem('phone');	
+								window.location.href="/firstPage?openid=" + openid + "&type="+type+"&phone="+phone
+							}
 							if(obj.data.data.type == 'pay'){
 	//							alert("预付款订单生成成功");
 								WeixinJSBridge.invoke('getBrandWCPayRequest', {
@@ -139,7 +148,12 @@
 								}, function(res) {
 									if(res.err_msg == "get_brand_wcpay_request:ok") {
 										alert("支付成功,谢谢使用");
-										window.location.href = '/firstPage';
+//										window.location.href = '/firstPage';
+										openid=localStorage.getItem('openid');
+										type=localStorage.getItem('type');
+										phone=localStorage.getItem('phone');
+										window.location.href="/firstPage?openid=" + openid + "&type="+type+"&phone="+phone
+
 									} else if(res.err_msg == "get_brand_wcpay_request:cancel") {
 										alert('你已取消支付');
 									} else if(res.err_msg == "get_brand_wcpay_request:fail") {
@@ -149,7 +163,7 @@
 							}
 							else{
 								alert("支付成功,谢谢使用");
-								window.location.href = '/firstPage';
+								window.location.href="/firstPage?openid=" + openid + "&type="+type+"&phone="+phone
 							}
 						} else {
 							alert("抱歉，支付失败，请稍后再试！");

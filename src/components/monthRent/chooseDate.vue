@@ -16,11 +16,9 @@
 			<div class="form-group">
 				<label class="parkText">租约时间 (月份)</label>
 				<div class="col-sm-10 monthDate deHeight">
-					<i class="ivu-icon ivu-icon-plus addImg"  @click='add' ></i>	
-					<input type="text" style="background: #fff;" class="form-control chooseDate" @blur="isibles" v-model="getNum" @click="pickMonth" placeholder="请选择租期时间" />
-			   		<i class="ivu-icon ivu-icon-minus delImg" @click='decrese'></i>	
-			   		
-			   		<!--<img src="../../assets/img/decrease.svg" class="delImg" />-->
+					<img src="../../assets/img/images/plus (1).svg" class="addImg" @click='add' />
+					<input type="text" style="background: #fff;padding: 6 27px;" class="form-control chooseDate" @blur="isibles" v-model="getNum" @click="pickMonth" placeholder="请选择租期时间" />
+			   		<img src="../../assets/img/images/minus (2).svg" class="delImg" @click='decrese' />
 			   <span v-show='show2' class="notice">请选择租期</span>
 				</div>
 			</div>
@@ -30,15 +28,15 @@
 			<div class="form-group">
 				<label class="parkText">选择停车场</label>
 				<div class="col-sm-10 deHeight">
-					<Input type="text" disabled="disabled" class="chanBack" v-model="parktext" placeholder="请选择停车场" ></Input>				
-					<span v-show='show3' class="notice">请选择停车场</span>
+					<Input type="text" disabled="disabled" class="chanBack" v-model="parktext" placeholder="停车场" ></Input>				
+					<span v-show='show3' class="notice">请输入停车场</span>
 				</div>
 	
 			</div>
-			<div class="form-group">
+			<div class="form-group" v-show="ifCarseat">
 				<label class="parkText">选择车位</label>
 				<div class="col-sm-10 deHeight">
-					<Input type="text" class="chanBack" disabled="disabled" v-model="carPlace" @blur="isiblesPark"  placeholder="请选择停车场" ></Input>
+					<Input type="text" class="chanBack" disabled="disabled" v-model="carPlace" @blur="isiblesPark"  placeholder="车位" ></Input>
 	<!--				<span v-show='show4' style="color:red;display:block">请选择车位</span>
 	-->			</div>
 			</div>
@@ -151,7 +149,7 @@
 				carPlace: "",
 				ser_text: "",
 				parkList: [],
-				billingid:'',
+				billingid:'',ifCarseat:false,
 				lists: [{
 						name: 1
 					}, {
@@ -184,7 +182,7 @@
 				carSeat: '',
 				parkportid: '',
 				sd: true,
-				parkid: '',phone:'',parkportid:'',
+				parkid: '',phone:'',
 				optionsDate:{
 					disabledDate (date) {
 					     const disabledDay = date.getDate();
@@ -216,7 +214,7 @@
 		      
            this.$http({
                     method:'POST',
-                    url:'http://api.basecn.cn/cloud/api/park/findLeaseId',
+                    url:'http://api.basecn.cn/cloud/api/park/findLeaseId', 
                     data:{'number':cardNumber,'type':2}
                    }).then(res=>{
                    		
@@ -283,7 +281,7 @@
 		        }
 		        console.log(getMonth)
 		        //如果每个Input框都有值
-				if(this.firstValue!=''&&this.getNum!=''&&this.parktext!=''&&this.carPlace!=''){					
+				if(this.firstValue!=''&&this.getNum!=''&&this.parktext!=''){					
 			         var carT=localStorage.getItem('carType')
 			         console.log(carT)
 			         if(carT==0){
@@ -315,7 +313,7 @@
 						localStorage.setItem('billingfee',res.data.data.billinginifee)
 						localStorage.setItem('rentTime',this.getNum)
 						if(res.data.data.billingFee!=null||res.data.data.billingFee!=''){
-							localStorage.setItem('bli',res.data.data.billingId)							
+							localStorage.setItem('billing_id',res.data.data.billingId)							
 							this.$router.push({
 								name: 'pay'
 //								params: {

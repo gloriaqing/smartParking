@@ -1,4 +1,5 @@
 <style scoped>
+	.btn:focus, .btn:blur{color:#000 !important ;}
   .car{text-align: center;font-size: 14px;}
   /*.car img{width: 70px}*/
   .car h3{font-weight: normal;font-size: 16px;margin-bottom:0px;background: #1095D9;margin-top: 0px;
@@ -37,7 +38,7 @@
         this.$router.push('/rentDetail')
       }
     },
-    created() {
+    beforeCreate() {
       this.$http({
         method:'POST',
         "url":'http://prod20.yc-yunpass.com:8080/park/getMyCarList',

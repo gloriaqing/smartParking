@@ -172,7 +172,7 @@
   display: inline-block;
   height: 35px;
   font-size: 18px;
-  /*margin: 2px;*/
+  margin: 2px;
   border-radius: 4px;
   text-align: center;
   line-height: 35px;
@@ -192,6 +192,7 @@
 }
 .keyboard-body .keyboard-content.province a {
   width: 30px;
+  
 }
 .keyboard-body .keyboard-content.province a:nth-last-child(1),
 .keyboard-body .keyboard-content.province a:nth-last-child(2),
